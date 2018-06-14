@@ -2,10 +2,18 @@ language: java
 jdk:
   - oraclejdk8
 sudo: false
+install: true
 addons:
-  apt:
-    packages:
-      - oracle-java8-installer
+  sonarcloud:
+    organization: "lars-meijer-github"
+    token:
+      secure: "pnmxkq5ldPaTj96TYBN4QO1RHqeFmvZSxL7cP6d84AJPBJCLWKgDtuoJ7Lyg7+zGoTQY4bKtOgBaQ1xN7IgJP0vclw5Zp0p/wRk0olAf+zUvVVXMOFtzinUsb72OdZ6kWtf0C2xaslKHTMiha0boHfeFg3sVHT4rp3FT8sNaMRt5rntD2ltlCKEWli/RnnIaxViUgBjJl4O98OcKurZdfu+0Z8rgMYfJl8MInrkSCsJB0RGxAjyOywGmBEg/jRBWbJEMbUoN+YHVphiAVpDxlpnpTd6ZSxaMeLSazKMHf/6e/DMgdDEUvPyf+/ljrTrHRen7D8ji/2/uieQRsMhl5FCAz105Bk4e8RnPwAO8nwzBLdylhDsToNQO6dZgTwLR6iggcTXIXypzal0Mwta9MGKFDmMWOhYcaaBkEXg8Olthvgt/5zpZEDEAMtXUZ7aK72jV8F5lsjctrgXjjpAjQkedvhheDvyBUjvstxDSfm3GjTueAol++PX3M3u/EnMF3CuLJxGSW/yIr+tX1wwmiZ7CQsFdrPd3Eg1eKbbsTbLYJx8i89kqhsyapPSkqEgi3WOG00IHDHhlDnRQZHGxxpd8iDDnjimy95OLLt98dJj+oWnvz6QG8aHWMhyCVumIxHLaaH7udrFYGa3VfMFgdBApYjI1A2adQQz3+KQgNUk="
 notifications:
   email:
-    - graphterteam@gmail.com
+    - s2021749@student.utwente.nl
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
