@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/meteoorkip/GraphterEffects.svg?branch=master)](https://travis-ci.org/meteoorkip/GraphterEffects)
+[![Build Status](https://travis-ci.org/Lars-Meijer/GraphterEffects2.svg?branch=master)](https://travis-ci.org/Lars-Meijer/GraphterEffects2)
 
 **This product is currently being further developed.
 The available version is an work-in-progress and not yet suited for regular use.**
