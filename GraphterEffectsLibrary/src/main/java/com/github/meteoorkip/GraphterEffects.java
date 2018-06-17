@@ -22,6 +22,12 @@ import java.util.Set;
 
 public class GraphterEffects {
 
+    private static final String VERSION = "version";
+    private static final String HELP = "help";
+    private static final String NOGRAPH = "nograph";
+    private static final String PRINTRESULT = "printresult";
+    private static final String DEBUGINFO = "printresult";
+
     public static final String HELPSTRING = "Usage: java -jar GraphterEffects.jar <flags and arguments>." + System.lineSeparator() +
             "For example: java -jar GraphterEffects.jar \"C:/Documents/graph1.dot\" \"C:/Documents/viz.vis\" \"D:/Outputs/1.svg\"" + System.lineSeparator() + System.lineSeparator() +
             "The order of arguments should be as follows:" + System.lineSeparator() + System.lineSeparator() +
@@ -39,46 +45,46 @@ public class GraphterEffects {
 
     public static void main(String[] args) throws IOException, SAXException, GraafvisCompiler.SyntaxException, GraafvisCompiler.CheckerException, InvalidTheoryException, UnknownFlagException {
         Pair<String[], Set<String>> argsflags = processFlags(args);
-        if (argsflags.getSecond().contains("help") && argsflags.getSecond().size() > 1) {
+        if (argsflags.getSecond().contains(HELP) && argsflags.getSecond().size() > 1) {
             System.out.println("Error: If help flag is used, no other flags may be used. Type --help for help.");
             return;
         }
-        if (argsflags.getSecond().contains("version") && argsflags.getSecond().size() > 1) {
+        if (argsflags.getSecond().contains(VERSION) && argsflags.getSecond().size() > 1) {
             System.out.println("Error: If version flag is used, no other flags may be used. Type --help for help.");
             return;
         }
-        if (argsflags.getSecond().contains("help") && argsflags.getFirst().length > 0) {
+        if (argsflags.getSecond().contains(HELP) && argsflags.getFirst().length > 0) {
             System.out.println("Error: If help flag is used, no arguments are expected. Type --help for help.");
             return;
         }
-        if (argsflags.getSecond().contains("version") && argsflags.getFirst().length > 0) {
+        if (argsflags.getSecond().contains(VERSION) && argsflags.getFirst().length > 0) {
             System.out.println("Error: If version flag is used, no arguments are expected. Type --help for help.");
             return;
         }
-        if (argsflags.getSecond().contains("help")) {
+        if (argsflags.getSecond().contains(HELP)) {
             showHelp();
             return;
         }
-        if (argsflags.getSecond().contains("version")) {
+        if (argsflags.getSecond().contains(VERSION)) {
             showVersion();
             return;
         }
 
         int expectedargs = 3;
-        if (argsflags.getSecond().contains("nograph")) {
+        if (argsflags.getSecond().contains(NOGRAPH)) {
             expectedargs--;
         }
-        if (argsflags.getSecond().contains("printresult")) {
+        if (argsflags.getSecond().contains(PRINTRESULT)) {
             expectedargs--;
         }
-        if (argsflags.getSecond().contains("help") || argsflags.getSecond().contains("version")) {
+        if (argsflags.getSecond().contains(HELP) || argsflags.getSecond().contains(VERSION)) {
             expectedargs = 0;
         }
         if (argsflags.getFirst().length != expectedargs) {
             System.out.println("Error: Expected " + expectedargs + " arguments, received " + argsflags.getFirst().length + ". Type --help for help.");
             return;
         }
-        boolean debuginfo = argsflags.getSecond().contains("debuginfo");
+        boolean debuginfo = argsflags.getSecond().contains(DEBUGINFO);
 
 
 
@@ -86,11 +92,11 @@ public class GraphterEffects {
         String svgarg = null;
         String scriptarg = null;
         if (expectedargs > 0) {
-            if (!argsflags.getSecond().contains("nograph")) {
+            if (!argsflags.getSecond().contains(NOGRAPH)) {
                 grapharg = argsflags.getFirst()[0];
         }
             scriptarg = grapharg == null ? argsflags.getFirst()[0] : argsflags.getFirst()[1];
-            if (!argsflags.getSecond().contains("printresult")) {
+            if (!argsflags.getSecond().contains(PRINTRESULT)) {
                 svgarg = grapharg == null? argsflags.getFirst()[1] : argsflags.getFirst()[2];
             }
         }
@@ -146,20 +152,21 @@ public class GraphterEffects {
         for (String anInput : input) {
             if (anInput.startsWith("--")) {
                 switch (anInput.substring(2)) {
-                    case "printresult":
-                        flags.add("printresult");
+                    case PRINTRESULT:
+                        flags.add(PRINTRESULT);
                         break;
-                    case "nograph":
-                        flags.add("nograph");
+                    case NOGRAPH:
+                        flags.add(NOGRAPH);
                         break;
-                    case "help":
-                        flags.add("help");
+                    case HELP:
+                        flags.add(HELP);
                         break;
-                    case "version":
-                        flags.add("version");
+                    case VERSION:
+                        flags.add(VERSION);
                         break;
-                    case "debuginfo":
-                        flags.add("debuginfo");
+                    case DEBUGINFO:
+                        flags.add(DEBUGINFO);
+                        break;
                     default:
                         throw new UnknownFlagException("Unknown flag: " + anInput.substring(2));
                 }
@@ -167,19 +174,19 @@ public class GraphterEffects {
                 for (char p : anInput.substring(1).toCharArray()) {
                     switch (p) {
                         case 'p':
-                            flags.add("printresult");
+                            flags.add(PRINTRESULT);
                             break;
                         case 'n':
-                            flags.add("nograph");
+                            flags.add(NOGRAPH);
                             break;
                         case 'h':
-                            flags.add("help");
+                            flags.add(HELP);
                             break;
                         case 'v':
-                            flags.add("version");
+                            flags.add(VERSION);
                             break;
                         case 'd':
-                            flags.add("debuginfo");
+                            flags.add(DEBUGINFO);
                             break;
                         default:
                             throw new UnknownFlagException("Unknown flag: " + anInput.substring(2));
