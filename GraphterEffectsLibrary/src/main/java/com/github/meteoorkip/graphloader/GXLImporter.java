@@ -161,7 +161,7 @@ final class GXLImporter {
         }
         GXLAttr version = graph.getAttr("$version");
         if (version != null && "curly".equals(getFromGXLValue(version.getValue(), false))) {
-            tograph = Grooveify(tograph);
+            tograph = grooveify(tograph);
         }
         return tograph;
     }
@@ -234,44 +234,33 @@ final class GXLImporter {
         return idgotten;
     }
 
-    private static Graph Grooveify(Graph input) {
+    private static Graph grooveify(Graph input) {
         Graph res = GraphUtils.newGraphWithSameType(input);
         for (String key : input.getAttributeKeySet()) {
             res.setAttribute(key, (Object) input.getAttribute(key));
         }
-        res = GrooveifyNodes(input, res);
-        res = GrooveifyEdges(input, res);
+        grooveifyNodes(input, res);
+        grooveifyEdges(input, res);
         return res;
     }
 
-    private static Graph GrooveifyNodes(Graph input, Graph res) {
+    private static void grooveifyNodes(Graph input, Graph res) {
         for (Node node : input.getEachNode()) {
             Node added = res.addNode(node.getId());
             for (String key : node.getAttributeKeySet()) {
                 added.setAttribute(key, (Object) node.getAttribute(key));
             }
         }
-        return res;
     }
 
-    private static Graph GrooveifyEdges(Graph input, Graph res) {
+    private static void grooveifyEdges(Graph input, Graph res) {
         for (Edge edge : input.getEachEdge()) {
             if (edge.getSourceNode().equals(edge.getTargetNode())) {
                 String label = edge.getAttribute("label");
                 if (label == null) {
                     continue;
                 }
-                label = label.substring(1, label.length() - 1);
-                String[] attribute = label.split(":", 2);
-                if (attribute.length == 1) {
-                    res.getNode(edge.getSourceNode().getId()).setAttribute("label", "\"" + attribute[0] + "\"");
-                } else if (attribute.length == 2) {
-                    // FIXME: Should support type imports instead
-                    if ("type".equals(attribute[0])) {
-                        attribute[0] = "label";
-                    }
-                    res.getNode(edge.getSourceNode().getId()).setAttribute(attribute[0], "\"" + attribute[1] + "\"");
-                }
+                grooveifyMethod(res, edge, label);
             } else {
                 Edge added = res.addEdge(edge.getId(), edge.getSourceNode().getId(), edge.getTargetNode().getId(), edge.isDirected());
                 for (String key : edge.getAttributeKeySet()) {
@@ -279,6 +268,19 @@ final class GXLImporter {
                 }
             }
         }
-        return res;
+    }
+
+    private static void grooveifyMethod(Graph res, Edge edge, String label) {
+        label = label.substring(1, label.length() - 1);
+        String[] attribute = label.split(":", 2);
+        if (attribute.length == 1) {
+            res.getNode(edge.getSourceNode().getId()).setAttribute("label", "\"" + attribute[0] + "\"");
+        } else if (attribute.length == 2) {
+            // FIXME: Should support type imports instead
+            if ("type".equals(attribute[0])) {
+                attribute[0] = "label";
+            }
+            res.getNode(edge.getSourceNode().getId()).setAttribute(attribute[0], "\"" + attribute[1] + "\"");
+        }
     }
 }
