@@ -136,7 +136,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param ID Identifier of the {@link Graph} element.
      * @return Whether the given object is directed.
      */
-    public boolean directedSecond1(Term ID) {
+    public boolean directedSecond_1(Term ID) {
         return bool((Struct) ID.getTerm(), GraphUtils::isDirectedGeneral, false, true, true);
     }
 
@@ -146,7 +146,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param ID Identifier of the {@link Graph} element.
      * @return Whether the given object is undirected.
      */
-    public boolean undirectedSecond1(Term ID) {
+    public boolean undirectedSecond_1(Term ID) {
         return bool((Struct) ID.getTerm(), GraphUtils::isUnDirectedGeneral, false, true, true);
     }
 
@@ -157,7 +157,7 @@ public class ASCLibrary extends GraphLibrary {
      * @return true
      */
     @SuppressWarnings("SameReturnValue")
-    public boolean println1(Term ignore) {
+    public boolean println_1(Term ignore) {
         TuProlog.log(ignore.getTerm().toString());
         System.out.println(ignore.getTerm().toString());
         return true;
@@ -169,8 +169,8 @@ public class ASCLibrary extends GraphLibrary {
      * @param ID Identifier of the {@link Graph} element.
      * @return Whether the given {@link Graph} is undirected.
      */
-    public boolean mixedSecond1(Term ID) {
-        return directedSecond1(ID) == undirectedSecond1(ID);
+    public boolean mixedSecond_1(Term ID) {
+        return directedSecond_1(ID) == undirectedSecond_1(ID);
     }
 
     /**
@@ -180,7 +180,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param count {@link Edge} count of the {@link Graph}
      * @return Whether unification was possible or the given count was correct.
      */
-    public boolean edgeCountSecond2(Term ID, Term count) {
+    public boolean edgeCountSecond_2(Term ID, Term count) {
         return numeric((Struct) ID.getTerm(), count, n -> ((Graph) n).getEdgeCount(), false, false, true);
     }
 
@@ -190,7 +190,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param ID Identifier of the {@link Graph}.
      * @return Whether the {@link Graph} is a {@link SingleGraph}.
      */
-    public boolean singlegraphSecond1(Term ID) {
+    public boolean singlegraphSecond_1(Term ID) {
         return bool((Struct) ID.getTerm(), n -> n instanceof SingleGraph, false, false, true);
     }
 
@@ -200,7 +200,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param ID Identifier of the {@link Graph}.
      * @return Whether the {@link Graph} is a {@link MultiGraph}.
      */
-    public boolean multigraphSecond1(Term ID) {
+    public boolean multigraphSecond_1(Term ID) {
         return bool((Struct) ID.getTerm(), n -> n instanceof MultiGraph, false, false, true);
     }
 
@@ -211,7 +211,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param count {@link Node} count of the {@link Graph}
      * @return Whether unification was possible or the given count was correct.
      */
-    public boolean nodeCountSecond2(Term ID, Term count) {
+    public boolean nodeCountSecond_2(Term ID, Term count) {
         return numeric((Struct) ID.getTerm(), count, n -> ((Graph) n).getNodeCount(), false, false, true);
     }
 
@@ -222,7 +222,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param count Component count of the {@link Graph}
      * @return Whether unification was possible or the given count was correct.
      */
-    public boolean componentCountSecond2(Term ID, Term count) {
+    public boolean componentCountSecond_2(Term ID, Term count) {
         return numeric((Struct) ID.getTerm(), count, n -> GraphUtils.ConnectedComponentsCount(((Graph) n)), false, false, true);
     }
 
@@ -233,7 +233,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param count Attribute count of the {@link Graph}
      * @return Whether unification was possible or the given count was correct.
      */
-    public boolean attributeCountSecond2(Term ID, Term count) {
+    public boolean attributeCountSecond_2(Term ID, Term count) {
         return numeric((Struct) ID.getTerm(), count, Element::getAttributeCount, true, true, true);
     }
 
@@ -244,7 +244,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param count Degree of the {@link Node}
      * @return Whether unification was possible or the given degree was correct.
      */
-    public boolean degreeSecond2(Term ID, Term count) {
+    public boolean degreeSecond_2(Term ID, Term count) {
         return numeric((Struct) ID.getTerm(), count, n -> ((Node) n).getDegree(), true, false, false);
     }
 
@@ -255,7 +255,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param count Indegree of the {@link Node}
      * @return Whether unification was possible or the given indegree was correct.
      */
-    public boolean indegreeSecond2(Term ID, Term count) {
+    public boolean indegreeSecond_2(Term ID, Term count) {
         return numeric((Struct) ID.getTerm(), count, n -> ((Node) n).getInDegree(), true, false, false);
     }
 
@@ -266,7 +266,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param count Outdegree of the {@link Node}
      * @return Whether unification was possible or the given outdegree was correct.
      */
-    public boolean outdegreeSecond2(Term ID, Term count) {
+    public boolean outdegreeSecond_2(Term ID, Term count) {
         return numeric((Struct) ID.getTerm(), count, n -> ((Node) n).getOutDegree(), true, false, false);
     }
 
@@ -277,7 +277,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param count Number of neighbours the {@link Node} has.
      * @return Whether unification was possible or the given number was correct.
      */
-    public boolean neighbourCountSecond2(Term ID, Term count) {
+    public boolean neighbourCountSecond_2(Term ID, Term count) {
         return numeric((Struct) ID.getTerm(), count, n -> GraphUtils.neighbourCount((Node) n), true, false, false);
     }
 
@@ -289,7 +289,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param component Numeric identifier of the component this {@link Node} is in.
      * @return Whether unification was possible or the given component ID was correct.
      */
-    public boolean inComponentSecond2(Term ID, Term component) {
+    public boolean inComponentSecond_2(Term ID, Term component) {
         GraphUtils.ConnectedComponentsCount(graph);
         return numeric((Struct) ID.getTerm(), component, n -> n.getAttribute("_ATTRIBUTE_DETERMINING_WHICH_COMPONENT_THE_NODE_BELONGS_TO_"), true, false, false);
     }
@@ -304,7 +304,7 @@ public class ASCLibrary extends GraphLibrary {
      * @param to   Target {@link Node} of the shortest path.
      * @return Whether the given {@link Edge} lies on the shortest path between the two {@link Node} objects.
      */
-    public boolean inShortestPathSecond3(Term ID, Term from, Term to) {
+    public boolean inShortestPathSecond_3(Term ID, Term from, Term to) {
         if (dijkstra == null) {
             dijkstra = new Dijkstra(null, "_ATTRIBUTE_FOR_SHORTEST_PATH_", null);
             dijkstra.init(graph);
@@ -322,7 +322,7 @@ public class ASCLibrary extends GraphLibrary {
      * @return Whether the {@link Edge} is in the minimal spanning tree of the {@link Graph}.
      */
     @SuppressWarnings("SuspiciousMethodCalls")
-    public boolean inMSTSecond1(Term ID) {
+    public boolean inMSTSecond_1(Term ID) {
         try {
             return bool((Struct) ID.getTerm(), n -> GraphUtils.getMST(graph).contains(n), false, true, false);
         } catch (Exception | AssertionError e) {
