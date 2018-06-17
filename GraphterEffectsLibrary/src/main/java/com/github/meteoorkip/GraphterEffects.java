@@ -26,7 +26,7 @@ public class GraphterEffects {
     private static final String HELP = "help";
     private static final String NOGRAPH = "nograph";
     private static final String PRINTRESULT = "printresult";
-    private static final String DEBUGINFO = "printresult";
+    private static final String DEBUGINFO = "debuginfo";
 
     public static final String HELPSTRING = "Usage: java -jar GraphterEffects.jar <flags and arguments>." + System.lineSeparator() +
             "For example: java -jar GraphterEffects.jar \"C:/Documents/graph1.dot\" \"C:/Documents/viz.vis\" \"D:/Outputs/1.svg\"" + System.lineSeparator() + System.lineSeparator() +
