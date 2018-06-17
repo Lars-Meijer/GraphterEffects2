@@ -71,7 +71,7 @@ public class GraafvisCompiler {
         /* Parsing successful, continue to checking phase */
         GraafvisChecker checker = new GraafvisChecker();
         CheckerResult checkerResult = checker.check(programContext);
-        if (!checkerResult.getErrors().isEmpty()g) {
+        if (!checkerResult.getErrors().isEmpty()) {
             /* Checker found errors */
             StringBuilder sb = new StringBuilder();
             sb.append("TODO message for RON"); //TODO for RON
