@@ -239,12 +239,22 @@ final class GXLImporter {
         for (String key : input.getAttributeKeySet()) {
             res.setAttribute(key, (Object) input.getAttribute(key));
         }
+        res = GrooveifyNodes(input, res);
+        res = GrooveifyEdges(input, res);
+        return res;
+    }
+
+    private static Graph GrooveifyNodes(Graph input, Graph res) {
         for (Node node : input.getEachNode()) {
             Node added = res.addNode(node.getId());
             for (String key : node.getAttributeKeySet()) {
                 added.setAttribute(key, (Object) node.getAttribute(key));
             }
         }
+        return res;
+    }
+
+    private static Graph GrooveifyEdges(Graph input, Graph res) {
         for (Edge edge : input.getEachEdge()) {
             if (edge.getSourceNode().equals(edge.getTargetNode())) {
                 String label = edge.getAttribute("label");
