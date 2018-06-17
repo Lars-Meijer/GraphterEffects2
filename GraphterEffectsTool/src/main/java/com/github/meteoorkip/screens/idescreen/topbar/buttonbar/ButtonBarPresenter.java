@@ -216,7 +216,7 @@ public class ButtonBarPresenter implements Initializable, Observer {
 
                 graphComboBox.getSelectionModel().select(indexSelected);
 
-                if(graphComboBox.getItems().size() == 0){
+                if(graphComboBox.getItems().isEmpty()){
                     FileModel.getInstance().setSelectedGraph(null);
                     choiceBoxFilled = false;
                 } else {

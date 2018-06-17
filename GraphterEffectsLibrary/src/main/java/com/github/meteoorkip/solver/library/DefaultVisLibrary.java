@@ -154,7 +154,7 @@ public class DefaultVisLibrary extends VisLibrary {
             // Do nothing.
         }));
         putQuery("bounds(MinBound, MaxBound)", (visMap, results) -> {
-            if (results.size() == 0) {
+            if (results.isEmpty()) {
                 return;
             } else if (results.size() > 1) {
                 throw new RuntimeException("Bounds can only be set once");
