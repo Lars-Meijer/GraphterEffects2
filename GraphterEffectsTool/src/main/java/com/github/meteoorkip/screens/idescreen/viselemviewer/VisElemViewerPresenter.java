@@ -47,7 +47,7 @@ public class VisElemViewerPresenter implements Initializable {
             TreeItem visElemTreeItem = new TreeItem<>("Element " + atom);
             VisElem visElem = visElemMap.get(atom);
             for (String key : visElem.getValues().keySet())
-                if (filterArgs.size() != 0) {
+                if (!filterArgs.isEmpty()) {
                     for (String filterArg : filterArgs) {
                         if (key.toLowerCase().contains(filterArg.toLowerCase())) {
                             visElemTreeItem.getChildren().add(new TreeItem<>(key + ": " + visElem.getValues().get(key)));
