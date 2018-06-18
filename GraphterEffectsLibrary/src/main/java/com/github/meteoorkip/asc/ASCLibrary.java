@@ -35,7 +35,7 @@ public class ASCLibrary extends GraphLibrary {
 
 
 
-    private String stringRep(Object term) {
+    private String StringRep(Object term) {
         try {
             if (term instanceof Integer || (term instanceof String && ((String) term).matches("\\d*"))) {
                 return term.toString();
@@ -44,7 +44,7 @@ public class ASCLibrary extends GraphLibrary {
             } else if (term instanceof String[]) {
                 String[] res = new String[((String[]) term).length];
                 for (int i = 0; i < ((String[]) term).length; i++) {
-                        res[i] = stringRep(((String[])term)[i]);
+                        res[i] = StringRep(((String[])term)[i]);
                 }
                 return Arrays.asList(res).toString();
             } else if (term instanceof String && ((String) term).matches("\".*\"")) {
@@ -54,7 +54,7 @@ public class ASCLibrary extends GraphLibrary {
                     return "[]";
                 } else {
                     if (((List) term).get(0) instanceof String) {
-                        return stringRep(((List)term).toArray(new String[0]));
+                        return StringRep(((List)term).toArray(new String[0]));
                     } else {
                         throw new RuntimeException("Unknown attribute value type: " + term.getClass());
                     }
@@ -83,7 +83,7 @@ public class ASCLibrary extends GraphLibrary {
             for (Node n : graph.getEachNode()) {
                 sb.append("node(\"" + n.getId() + "\").\n");
                 for (String attrKey : n.getAttributeKeySet()) {
-                    sb.append("attribute(\"" + n.getId() + "\", '\"" + attrKey + "\"', " + stringRep(n.getAttribute(attrKey)) + ").\n");
+                    sb.append("attribute(\"" + n.getId() + "\", '\"" + attrKey + "\"', " + StringRep(n.getAttribute(attrKey)) + ").\n");
                 }
             }
             for (Edge n : graph.getEachEdge()) {
@@ -91,11 +91,11 @@ public class ASCLibrary extends GraphLibrary {
                 sb.append("edge(\"" + n.getSourceNode().getId() + "\", \"" + n.getTargetNode().getId() + "\").\n");
                 sb.append("edge(\"" + n.getSourceNode().getId() + "\", \"" + n.getTargetNode().getId() + "\", \"" + n.getId() + "\").\n");
                 for (String attrKey : n.getAttributeKeySet()) {
-                    sb.append("attribute(\"" + n.getId() + "\", '\"" + attrKey + "\"', " + stringRep(n.getAttribute(attrKey)) + ").\n");
+                    sb.append("attribute(\"" + n.getId() + "\", '\"" + attrKey + "\"', " + StringRep(n.getAttribute(attrKey)) + ").\n");
                 }
             }
             for (String attrKey : graph.getAttributeKeySet()) {
-                sb.append("attribute(\"" + graph.getId() + "\", '\"" + attrKey + "\"', " + stringRep(graph.getAttribute(attrKey)) + ").\n");
+                sb.append("attribute(\"" + graph.getId() + "\", '\"" + attrKey + "\"', " + StringRep(graph.getAttribute(attrKey)) + ").\n");
             }
 
             sb.append("undirected(X) :- graph(X), undirectedSecond(X).\n");
