@@ -50,7 +50,7 @@ public class ASCLibrary extends GraphLibrary {
             } else if (term instanceof String && ((String) term).matches("\".*\"")) {
                 return "'" + term + "'";
             } if (term instanceof List) {
-                if (((List) term).isEmpty()) {
+                if (((List) term).size() == 0) {
                     return "[]";
                 } else {
                     if (((List) term).get(0) instanceof String) {
