@@ -94,5 +94,3 @@ Arend Rensink
 Website: [rebrand.ly/graphtereffects](https://rebrand.ly/graphtereffects)
 
 Email: [graphtereffects@gmail.com](mailto:graphtereffects@gmail.com)
-
-test
