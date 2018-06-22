@@ -1,7 +1,10 @@
 package com.github.meteoorkip.util;
 
 
+import com.sun.org.apache.xerces.internal.dom.DeferredTextImpl;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -42,14 +45,31 @@ public class XMLLoader {
     public Tree readXML(String xmlDoc) throws SAXException {
         try {
             Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(xmlDoc.getBytes("utf-8"))));
-            Tree tree = new Tree();
-            tree.setName(doc.getDocumentElement().getTagName());
-            return tree;
+            return readRec(doc.getDocumentElement());
         } catch (IOException e) {
             //We do not use the functionality to read from a file, so this should never happen.
             e.printStackTrace();
             System.exit(1);
             return null;
         }
+    }
+
+
+    /**
+     * Converts a DOM node into a Tree, recursively.
+     *
+     * @param elem The DOM node to convert into a tree.
+     * @return The Tree.
+     */
+    private Tree readRec(Node elem) {
+        Tree tree = new Tree();
+        tree.setName(elem.getNodeName());
+        NodeList children = elem.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            if (!(children.item(i) instanceof DeferredTextImpl)) {
+                tree.addChild(readRec(children.item(i)));
+            }
+        }
+        return tree;
     }
 }

@@ -1,5 +1,6 @@
 package com.github.meteoorkip.util;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Tree {
@@ -8,6 +9,10 @@ public class Tree {
      * The name of this Tree node.
      */
     private String name = "undefined";
+    /**
+     * List of children of this Tree node.
+     */
+    private List<Tree> children = new LinkedList<>();
 
     /**
      * Returns the name of this Tree node.
@@ -29,10 +34,18 @@ public class Tree {
 
     /**
      * Returns a list of children of this Tree node.
-     *
      * @return The list of children.
      */
     public List<Tree> getChildren() {
-        return null;
+        return new LinkedList<>(this.children);
+    }
+
+    /**
+     * Adds a child to this Tree node.
+     *
+     * @param item The child to be added.
+     */
+    public void addChild(Tree item) {
+        this.children.add(item);
     }
 }
