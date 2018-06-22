@@ -1,0 +1,16 @@
+<car>
+    <engine>
+        <cilinder></cilinder>
+        <cilinder></cilinder>
+        <cilinder></cilinder>
+        <cilinder></cilinder>
+        <cilinder></cilinder>
+        <cilinder></cilinder>
+        <cilinder></cilinder>
+        <cilinder></cilinder>
+    </engine>
+    <wheel></wheel>
+    <wheel></wheel>
+    <wheel></wheel>
+    <wheel></wheel>
+</car>

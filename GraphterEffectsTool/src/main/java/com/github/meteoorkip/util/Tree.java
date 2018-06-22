@@ -1,5 +1,7 @@
 package com.github.meteoorkip.util;
 
+import java.util.List;
+
 public class Tree {
 
     /**
@@ -23,5 +25,14 @@ public class Tree {
      */
     public void setName(String nodeName) {
         this.name = nodeName;
+    }
+
+    /**
+     * Returns a list of children of this Tree node.
+     *
+     * @return The list of children.
+     */
+    public List<Tree> getChildren() {
+        return null;
     }
 }
