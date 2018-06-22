@@ -3,6 +3,7 @@ package com.github.meteoorkip.util;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 import testutils.TestUtils;
 
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class XMLLoaderTest {
      * Tests the simple functionality of reading a single xml node from a String.
      */
     @Test
-    public void testReadXML() {
+    public void testReadXML() throws SAXException {
         Tree root = xmlLoader.readXML(only_root);
         assertEquals("root", root.getName());
     }
