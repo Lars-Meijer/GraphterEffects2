@@ -1,7 +1,9 @@
 package com.github.meteoorkip.util;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Tree {
 
@@ -13,6 +15,10 @@ public class Tree {
      * List of children of this Tree node.
      */
     private List<Tree> children = new LinkedList<>();
+    /**
+     * Map containing attribute key-value pairs. Access this with <code>getAttribute(key)</code>
+     */
+    private Map<String, String> attributes = new HashMap<>();
 
     /**
      * Returns an XML attribute of this Tree node.
@@ -21,8 +27,7 @@ public class Tree {
      * @return The attribute value assigned to this key, or null if no such key is present.
      */
     public String getAttribute(String key) {
-        //TODO: implement
-        return null;
+        return attributes.get(key);
     }
 
     /**
@@ -39,7 +44,7 @@ public class Tree {
      *
      * @param nodeName The new name.
      */
-    public void setName(String nodeName) {
+    void setName(String nodeName) {
         this.name = nodeName;
     }
 
@@ -56,7 +61,18 @@ public class Tree {
      *
      * @param item The child to be added.
      */
-    public void addChild(Tree item) {
+    void addChild(Tree item) {
         this.children.add(item);
     }
+
+    /**
+     * Adds a new attribute key-value pair to this Tree node.
+     *
+     * @param key   The attribure key.
+     * @param value The attribute value.
+     */
+    void addAttribute(String key, String value) {
+        this.attributes.put(key, value);
+    }
+
 }

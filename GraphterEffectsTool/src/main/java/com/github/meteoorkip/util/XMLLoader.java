@@ -64,6 +64,11 @@ public class XMLLoader {
     private Tree readRec(Node elem) {
         Tree tree = new Tree();
         tree.setName(elem.getNodeName());
+        for (int i = 0; i < elem.getAttributes().getLength(); i++) {
+            String key = elem.getAttributes().item(i).getNodeName();
+            String value = elem.getAttributes().item(i).getNodeValue();
+            tree.addAttribute(key, value);
+        }
         NodeList children = elem.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
             if (!(children.item(i) instanceof DeferredTextImpl)) {
