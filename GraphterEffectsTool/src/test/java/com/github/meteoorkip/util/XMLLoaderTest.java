@@ -88,6 +88,26 @@ public class XMLLoaderTest {
         assertEquals(0, children.get(4).getChildren().size());
     }
 
+
+    @Test
+    public void testReadXMLChilrenTags() throws SAXException {
+        Tree root = xmlLoader.readXML(xml_with_children);
+        assertEquals("car", root.getName());
+        assertEquals("engine", root.getChildren().get(0).getName());
+        assertEquals("cilinder", root.getChildren().get(0).getChildren().get(0).getName());
+        assertEquals("cilinder", root.getChildren().get(0).getChildren().get(1).getName());
+        assertEquals("cilinder", root.getChildren().get(0).getChildren().get(2).getName());
+        assertEquals("cilinder", root.getChildren().get(0).getChildren().get(3).getName());
+        assertEquals("cilinder", root.getChildren().get(0).getChildren().get(4).getName());
+        assertEquals("cilinder", root.getChildren().get(0).getChildren().get(5).getName());
+        assertEquals("cilinder", root.getChildren().get(0).getChildren().get(6).getName());
+        assertEquals("cilinder", root.getChildren().get(0).getChildren().get(7).getName());
+        assertEquals("wheel", root.getChildren().get(1).getName());
+        assertEquals("wheel", root.getChildren().get(2).getName());
+        assertEquals("wheel", root.getChildren().get(3).getName());
+        assertEquals("wheel", root.getChildren().get(4).getName());
+    }
+
     /**
      * Tears down the test suite.
      */
