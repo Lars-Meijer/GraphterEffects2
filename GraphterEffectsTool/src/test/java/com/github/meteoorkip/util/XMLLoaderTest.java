@@ -23,9 +23,13 @@ public class XMLLoaderTest {
      */
     private String only_root = null;
     /**
-     * XML test fild containing an xml root and nested children.
+     * XML test file containing an xml root and nested children.
      */
     private String xml_with_children = null;
+    /**
+     * XML test file containing an xml root that has attributes and no children.
+     */
+    private String xml_with_attributes = null;
 
     /**
      * XMLLoader instance to act as Unit Under Test
@@ -50,6 +54,7 @@ public class XMLLoaderTest {
     public void LoadFiles() throws IOException {
         only_root = TestUtils.readFromResources("xmlfiles/only_root.xml");
         xml_with_children = TestUtils.readFromResources("xmlfiles/xml_with_children.xml");
+        xml_with_attributes = TestUtils.readFromResources("xmlfiles/xml_with_attributes.xml");
         xmlLoader = new XMLLoader();
     }
 
@@ -108,6 +113,14 @@ public class XMLLoaderTest {
         assertEquals("wheel", root.getChildren().get(4).getName());
     }
 
+    @Test
+    public void testReadXMLAttributes() throws SAXException {
+        Tree root = xmlLoader.readXML(xml_with_attributes);
+        assertEquals("value1", root.getAttribute("attr1"));
+        assertEquals("value2", root.getAttribute("attr2"));
+        assertEquals("value3", root.getAttribute("attr3"));
+    }
+
     /**
      * Tears down the test suite.
      */
@@ -115,6 +128,7 @@ public class XMLLoaderTest {
     public void TearDown() { // parasoft-suppress JUNIT.CSUTD
         only_root = null;
         xml_with_children = null;
+        xml_with_attributes = null;
         xmlLoader = null;
     }
 } // parasoft-suppress PB.TYPO.AECB

@@ -15,6 +15,17 @@ public class Tree {
     private List<Tree> children = new LinkedList<>();
 
     /**
+     * Returns an XML attribute of this Tree node.
+     *
+     * @param key The attribute key.
+     * @return The attribute value assigned to this key, or null if no such key is present.
+     */
+    public String getAttribute(String key) {
+        //TODO: implement
+        return null;
+    }
+
+    /**
      * Returns the name of this Tree node.
      *
      * @return The name of this Tree node.
